@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String  @id
+  username      String
+  avatarUrl     String?
+
+  commandsUsed Int @default(0)
+
+  noContextEntries NoContext[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Guild {
+  id      String  @id
+  name    String
+  iconUrl String?
+
+  noContextEntries NoContext[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model NoContext {
+  id              Int      @id @default(autoincrement())
+  guild           Guild    @relation(fields: [guildId], references: [id])
+  guildId         String
+  imageLink       String   @unique
+  linkTag         String?
+  textTag         String?
+  importer        User     @relation(fields: [importerId], references: [id])
+  importerId      String
+  createdAt       DateTime @default(now()) 
+  updatedAt       DateTime @updatedAt
+}
+
+// model nocontext {
+//   id              Int     @id @default(autoincrement())
+//   guildid         String
+//   imagelink       String
+//   linktag         String?
+//   texttag         String?
+//   importerid      String
+//   importmessageid String
+// }
+
+// model people {
+//   id              Int     @id @default(autoincrement())
+//   guildid         String
+//   imagelink       String
+//   linktag         String?
+//   texttag         String?
+//   importerid      String
+//   importmessageid String
+// }
+
+// model pets {
+//   id              Int     @id @default(autoincrement())
+//   guildid         String
+//   imagelink       String
+//   linktag         String?
+//   texttag         String?
+//   importerid      String
+//   importmessageid String
+// }
