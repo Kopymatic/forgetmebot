@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { randomInt } from "crypto";
 import * as dotenv from "dotenv-flow"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-import { Client, Constants, Guild, User } from "oceanic.js";
+import { ActivityTypes, Client, Constants, Guild, User } from "oceanic.js";
 import { CommandHandler } from "oceanic.js-interactions";
 import { DataTypes, Sequelize } from "sequelize";
 import { NoContext } from "./oldTables";
@@ -48,6 +48,10 @@ async function main() {
     console.log("Publishing Commands");
 
     handler.publishCommands();
+
+    client.editStatus("online", [
+      { name: "Version 0.0.1", type: ActivityTypes.WATCHING },
+    ]);
   });
 
   client.on("error", (err) => {
