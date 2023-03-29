@@ -4,13 +4,15 @@
   "description": "A bot to remember all your memories, memes, and more!",
   "main": "index.js",
   "scripts": {
-    "run": "npx tsc && node dist/index.js",
+    "dev": "npx tsc && NODE_ENV=development node dist/index.js",
+    "production": "npx tsc && NODE_ENV=production node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kopymatic",
   "license": "ISC",
   "keywords": [],
   "devDependencies": {
+    "@types/dotenv-flow": "^3.2.0",
     "@types/node": "^18.15.5",
     "@types/node-fetch": "^2.6.2",
     "prisma": "^4.11.0",
@@ -20,7 +22,7 @@
   "dependencies": {
     "@prisma/client": "^4.11.0",
     "cumulonimbus-wrapper": "^2.1.1",
-    "dotenv": "^16.0.3",
+    "dotenv-flow": "^3.2.0",
     "node-fetch": "^2.6.9",
     "oceanic.js": "^1.5.1",
     "oceanic.js-interactions": "file:~/packages/oceanic.js-interactions-0.0.8.tgz",

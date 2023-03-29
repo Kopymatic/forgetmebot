@@ -1,13 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import { randomInt } from "crypto";
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from "dotenv-flow"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { Client, Constants, Guild, User } from "oceanic.js";
 import { CommandHandler } from "oceanic.js-interactions";
-dotenv.config();
 import { DataTypes, Sequelize } from "sequelize";
 import { NoContext } from "./oldTables";
 import Commands from "./commands";
 import Cumulonimbus from "cumulonimbus-wrapper";
+
+dotenv.config();
 
 export const prisma = new PrismaClient();
 export let client: Client;
@@ -54,7 +55,7 @@ async function main() {
   });
 
   handler.on("error", (err) => {
-    console.error("Something Broke!", err);
+    console.error("Something Broke in the handler!", err);
   });
 
   console.log(" Registering slash commands...");
